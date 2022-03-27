@@ -2,14 +2,14 @@
 
 namespace Laba3OOP
 {
-    internal class FirstContestant
+    internal class Contestant
     {
         private readonly string Surname;
         private readonly string Community;
         private readonly double First;
         private readonly double Second;
 
-        public FirstContestant(DataGridViewCellCollection cells)
+        public Contestant(DataGridViewCellCollection cells)
         {
             Surname = cells[0].Value.ToString()!;
             Community = cells[1].Value.ToString()!;
