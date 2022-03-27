@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Laba3OOP
 {
@@ -14,7 +10,7 @@ namespace Laba3OOP
     {
         public Form1()
         {
-            InitializeComponent()
+            InitializeComponent();
         }
 
         private void Confirm_Click(object sender, EventArgs e)
@@ -29,18 +25,25 @@ namespace Laba3OOP
             int ind = 0;
             foreach (var contestant in contestants.OrderBy((cont) => -cont.GetResult()))
             {
-                Results.Rows.Add(ind + 1,null);
+                Results.Rows.Add(ind + 1, null);
                 contestant.PopulateRow(Results.Rows[ind]);
                 ++ind;
             }
         }
+
         private void Contestants_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
         {
+            if (Contestants.Rows.Count == 1) return;
             try
             {
+                foreach (DataGridViewCell cell in Contestants.Rows[e.RowIndex].Cells)
+                    cell.Style.BackColor = Color.White;
                 var human = new FirstContestant(Contestants.Rows[e.RowIndex].Cells);
-            } catch
+            }
+            catch
             {
+                foreach (DataGridViewCell cell in Contestants.Rows[e.RowIndex].Cells)
+                    cell.Style.BackColor = Color.Red;
                 e.Cancel = true;
             }
         }
